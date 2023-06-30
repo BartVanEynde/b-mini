@@ -14,11 +14,21 @@
 
 
 <!-- WHY DOESN'T THIS WORK ??? -->
-<h3>{{ printf ".Site.Data.tags.%s" .Title }}</h3>
+<h3>{{ $tags := (index $.Site.Data.tags .Title) }}</h3>
 <p>
-    {{ with (printf ".Site.Data.tags.%s" .Title ) }}
-        <pre>{{ jsonify (dict "prefix" " " "indent" "  ") . }}</pre>
-    {{ end }}
+
+    <table>
+        <thead><th>Key</th><th>Value</th></thead>
+        <tbody>
+        {{ $tags := (index $.Site.Data.tags .Title) }}
+        {{ with $tags }}
+            {{ range $k,$v := . }}
+                <tr><td>{{ $k }}</td><td>{{ jsonify (dict "prefix" " " "indent" "  ") $v }}</td></tr>
+            {{ end }}
+        {{ end }}
+        </tbody>
+    </table>
+
 </p>
 
 
