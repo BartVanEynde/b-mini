@@ -1,0 +1,7 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'B-Mini'
+
+[Params]
+copyright = '2023 &copy; Bart'
+

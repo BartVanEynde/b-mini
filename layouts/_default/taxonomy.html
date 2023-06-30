@@ -1,0 +1,28 @@
+{{ define "main" }}
+<ul id="posts">
+{{- range .Pages }}
+    <li>
+        <a href="{{ .Permalink }}">
+            {{ .Title }}
+            <small><time>{{ .Date | time.Format (i18n "posts.date") }}</time></small>
+        </a>
+    </li>
+    
+{{- end }}
+</ul>
+
+
+
+<!-- WHY DOESN'T THIS WORK ??? -->
+<h3>{{ printf ".Site.Data.tags.%s" .Title }}</h3>
+<p>
+    {{ with (printf ".Site.Data.tags.%s" .Title ) }}
+        <pre>{{ jsonify (dict "prefix" " " "indent" "  ") . }}</pre>
+    {{ end }}
+</p>
+
+
+
+<div>( _default\taxonomy - Kind='{{ .Kind }}' )</div>
+
+{{ end }}

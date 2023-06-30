@@ -1,0 +1,23 @@
+{{ define "main" }}
+<p>
+    {{- .Content -}}
+</p>
+
+<div class="data-dump">
+    <h2>range $tag, $options := .Site.Data.tags</h2>
+	{{ range $tag, $options := .Site.Data.tags }}
+        <h3>{{ $tag }}</h3>
+        <pre>{{ jsonify (dict "prefix" " " "indent" "  ") $options }}</pre>
+    {{ end }}
+</div>
+
+<hr />
+<div class="data-dump">
+    <h2>or as one dump of .Site.Data.tags</h2>
+    <pre>{{ jsonify (dict "prefix" " " "indent" "  ") .Site.Data.tags }}</pre>
+</div>
+
+
+
+
+{{ end }}

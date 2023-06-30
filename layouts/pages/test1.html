@@ -1,0 +1,178 @@
+{{ define "main" }}
+<p>
+    {{- .Content -}}
+</p>
+
+
+<div class="div">
+    <h2>range $tag, $options := .Site.Data.tags</h2>
+	{{ range $tag, $options := .Site.Data.tags }}
+        {{ $tag }} - <pre>{{ jsonify $options }}</pre><hr /><br />
+    {{ end }}
+</div>
+
+
+<div class="div">
+    <h2>from layouts/_default/terms.html</h2>
+
+    {{ range sort .Site.Taxonomies.tags "Count" "desc" }}
+								<p>
+									<a href="{{ .Page.Permalink }}">
+										{{ .Page.Title }} ({{ .Count }})
+									</a>
+								</p>
+	{{ end }}
+
+</div>
+
+<div class="div">
+    <h2>from layouts/_default/terms.html + if .Count > 1 </h2>
+
+    {{/* range sort .Site.Taxonomies.tags "Count" "desc" */}}
+    {{ range .Site.Taxonomies.tags  }}
+        {{ if (gt .Count 1 ) }}
+								<p>
+									<a href="{{ .Page.Permalink }}">
+										{{ .Page.Title }} ({{ .Count }})
+									</a>
+								</p>
+        {{ end }}
+	{{ end }}
+
+</div>
+
+
+<div class="div">
+    <h2>if (hasPrefix .Page.Title "model")  </h2>
+
+    {{ range .Site.Taxonomies.tags  }}
+            {{ if (hasPrefix .Page.Title "model") }}
+                                <p>
+									<a href="{{ .Page.Permalink }}">
+										{{ .Page.Title }} ({{ .Count }})
+									</a>
+								</p>
+            {{ end }}
+    {{ end }}
+
+</div>
+
+
+<div class="div">
+    <h2>range .Site.Params.specialPages</h2>
+    {{ range .Site.Params.specialPages  }}
+        {{ $blacklist := . }}
+        <p>
+            {{ $blacklist }} - {{ printf "%T" $blacklist }} 
+		</p>
+    {{ end }}
+
+</div>
+
+
+<div class="div">
+    <h2>range .Site.Taxonomies.tags</h2>
+
+    {{/* range .Site.Taxonomies.tags  */}}
+    {{ range sort .Site.Taxonomies.tags "Count" "desc" }}
+        {{ $title := .Page.Title }}
+        {{ $count := .Count }}
+        {{ $permalink := .Page.Permalink }}
+        <p>
+            {{ $title }} - {{ $count }} - {{ $permalink }}
+		</p>
+    {{ end }}
+
+</div>
+
+
+
+<div class="div">
+    <h2>range .Site.Taxonomies.tags + if (gt .Count 1 )</h2>
+
+    {{/* range .Site.Taxonomies.tags  */}}
+    {{ range sort .Site.Taxonomies.tags "Count" "desc" }}
+        {{ $title := .Page.Title }}
+        {{ $count := .Count }}
+        {{ $permalink := .Page.Permalink }}
+        {{/* if in .Site.Params.specialPages "$title" */}}
+        {{ if (gt .Count 1 ) }}
+            <p>
+                {{ $title }} - {{ $count }} - {{ $permalink }}
+		    </p>
+        {{ end }}
+    {{ end }}
+
+</div>
+
+
+
+<div class="div">
+    <h2>if in .Site.Params.specialPages "work"</h2>
+
+
+    {{ if in .Site.Params.specialPages "work" }}
+        <p>	true	    </p>
+    {{ else }}
+        <p>	false	    </p>
+    {{ end }}
+
+</div>
+
+
+<div class="div">
+    <h2>if in .Site.Params.specialPages $work</h2>
+
+    {{ $work := "work2" }}
+    {{ if in .Site.Params.specialPages $work }}
+        <p>	true	    </p>
+    {{ else }}
+        <p>	false	    </p>
+    {{ end }}
+
+</div>
+
+
+
+
+<div class="div">
+    <h2>range .Site.Taxonomies.tags + if (gt .Count 1 )</h2>
+
+    {{/* range .Site.Taxonomies.tags  */}}
+    {{ range sort .Site.Taxonomies.tags "Count" "desc" }}
+        {{ $title := .Page.Title }}
+        {{ $count := .Count }}
+        {{ $permalink := .Page.Permalink }}
+        {{/* if in .Site.Params.specialPages "$title" */}}
+        {{ if (gt .Count 1 ) }}
+            <p>
+                {{ $title }} - {{ $count }} - {{ $permalink }} - {{/* if in .Site.Params.specialPages (string $title) }} True {{ else }} False {{ end */}}
+                = {{ printf "%T" $title }} - {{ printf "%T" .Page.Title }} - {{ printf "%T" $work }} - {{ printf "%T" "work" }}
+		    </p>
+        {{ end }}
+    {{ end }}
+
+</div>
+
+
+<div class="div">
+    <h2>range .Site.Taxonomies.tags + .Param specialPages </h2>
+
+    {{/* range .Site.Taxonomies.tags  */}}
+    {{ range sort .Site.Taxonomies.tags "Count" "desc" }}
+        {{ $title := .Page.Title }}
+        {{ $count := .Count }}
+        {{ $permalink := .Page.Permalink }}
+        {{/* if in ( .Param "specialPages" ) $title */}}
+        {{ if (gt .Count 1 ) }}
+            <p>
+                {{ $title }} - {{ $count }} - {{ $permalink }} - {{/* if in .Site.Params.specialPages (string $title) }} True {{ else }} False {{ end */}}
+                = {{ printf "%T" $title }} - {{ printf "%T" .Page.Title }} - {{ printf "%T" $work }} - {{ printf "%T" "work" }}
+		    </p>
+        {{ end }}
+    {{ end }}
+
+</div>
+
+{{ end }}
+

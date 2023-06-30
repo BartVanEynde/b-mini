@@ -1,0 +1,7 @@
+{{ define "main" }}
+    {{- .Content -}}
+
+<div>{{ partial "tagsonthispage.html" . }}</div>    
+
+<div>( _default\single - Kind='{{ .Kind }}' )</div>
+{{ end }}
