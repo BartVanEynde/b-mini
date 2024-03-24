@@ -1,0 +1,46 @@
+{{ define "main" }}
+<p>
+{{- .Content -}}
+</p>
+<hr />
+
+<div class="data-dump">
+    {{ $unorderedList := slice }}
+
+	{{/* https://github.com/gesquive/slate/blob/master/exampleSite/data/links.yml */}}
+	{{ range $tag, $options := .Site.Data.slate.tiles }}
+        {{ range $tag := $options.tags }}
+            {{ $unorderedList = append $tag $unorderedList }}
+        {{ end }}
+    {{ end }}
+    {{/* $unorderedList is now a list/slice/array of words (with dupplicates)  */}}
+
+    {{ $uniqTags := slice }}
+	{{ range $index, $tag := $unorderedList | uniq }}
+        {{ $count := 0 }}
+        {{ range $item := $unorderedList }}
+            {{ if eq $item $tag }}
+                {{ $count = add $count 1 }}
+            {{ end }}
+        {{ end }}
+        {{ $uniqTags = $uniqTags | append ( dict "tag" $tag "count" $count ) }}
+    {{ end }}
+    {{/* $uniqTags is now a slice of maps / list of key=>value pairs with unique (unsorted) keys pointing to their usage count  */}}
+
+    <h2>uniq -c + sort -rn</h2>
+    <ul>
+	{{ range sort $uniqTags "count" "desc"}}
+        <li>{{ .tag }} = {{ .count }}</li>
+    {{ end }}
+    </ul>
+</div>
+
+<div class="data-dump">
+    <h2>>1</h2>
+	{{ range sort ( where $uniqTags ".count" "gt" 1 ) ".tag" "asc" }}
+        <li>{{ .tag }} = {{ .count }}</li>
+    {{ end }}
+</div>
+
+
+{{ end }}

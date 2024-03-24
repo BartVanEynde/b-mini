@@ -1,0 +1,55 @@
+{{ define "main" }}
+<p>
+    {{- .Content -}}
+</p>
+
+{{ $s := slice "d" "a" "b" "c" "b" "b" "a" }}
+{{ $u := dict }}
+{{ $m := slice }}
+
+<hr />
+<div class="data-dump">
+    <h2>slice "d" "a" "b" "c" "b" "b" "a" | uniq</h2>
+    <pre>{{ jsonify (dict "prefix" " " "indent" "  ") ( $s | uniq ) }}</pre>
+</div>
+
+<hr />
+<div class="data-dump">
+    <h2>range $index, $tag := $s | uniq | sort</h2>
+	{{ range $index, $tag := $s | uniq | sort }}
+        <li>{{ $index }} - {{ $tag }}
+            {{ $count := 0 }}
+            {{ range $item := $s }}
+                {{ if eq $item $tag }}
+                    {{ $count = add $count 1 }}
+                {{ end }}
+            {{ end }}
+            = {{ $count }}
+        </li>
+        {{ $u = merge $u ( dict $tag $count ) }}
+    {{ end }}
+    <H3>$u</H3>
+    <pre>{{ jsonify (dict "prefix" " " "indent" "  ") $u }}</pre>
+</div>
+
+<hr />
+<div class="data-dump">
+    <h2>dict 2 slice of maps</h2>
+	{{ range $tag, $count := $u }}
+        {{ $m = $m | append ( dict "tag" $tag "count" $count ) }}
+    {{ end }}
+    <pre>{{ jsonify (dict "prefix" " " "indent" "  ") $m }}</pre>
+</div>
+
+
+<hr />
+<div class="data-dump">
+    <h2>uniq -c + sort -rn</h2>
+	{{ range sort $m "count" "desc"}}
+        <li>{{ .tag }} = {{ .count }}</li>
+    {{ end }}
+</div>
+
+
+
+{{ end }}

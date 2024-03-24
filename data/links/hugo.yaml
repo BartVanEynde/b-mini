@@ -1,0 +1,42 @@
+- Url: https://gohugo.io/functions/with/
+  Title: gohugo.io > functions > with
+  Description: 
+  Tags:
+  - hugo
+  - manual
+- Url: https://hugoconf.io/
+  Title: HugoConf
+  Description: 
+  Tags:
+  - hugo
+  - conference
+- Url: https://www.thenewdynamic.com/article/hugo-data/manipulation-slices-and-maps/
+  Title: "Regis Philibert - Hugo and Data: Advance manipulation with Slices and Maps"
+  Description: 
+  Tags:
+  - hugo
+  - blog
+- Url: https://www.jakewiesler.com/blog/hugo-taxonomies
+  Title: Add Tags to Your Hugo Blog Using Taxonomies
+  Description: 
+  Tags:
+  - hugo
+  - blog
+- Url: https://www.angela1c.com/projects/hugo-files/templating/
+  Title: Hugo Archetypes and Templates
+  Tags:
+  - hugo
+  - blog
+- Url: https://discourse.gohugo.io/t/featured-image-and-dictionary-values/45064/2
+  Title: Featured image and dictionary values
+  Description: partials pass variable with dict + default settings
+  Tags:
+  - hugo
+  - discourse
+- Url: https://discourse.gohugo.io/t/search-using-lunr-js-does-not-return-pages-urls-when-text-exist-in-page-sections/44807/7
+  Title: Search using lunr.js does not return pages/urls when text exist in page sections
+  Description: merging maps
+  Tags:
+  - hugo
+  - discourse
+

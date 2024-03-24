@@ -1,0 +1,184 @@
+tiles:
+-
+  name: "google"
+  url: "https://google.com"
+  img: "logos/google.svg"
+  tags: ["favorite", "search"]
+# -
+#  name: "bing"
+#  url: "https://bing.com"
+#  img: "logos/bing.svg"
+#  txt_color: "#ffffff"
+#  bg_color: "#ffb900"
+#  tags: ["search"]
+-
+  name: "Amazon BE"
+  url: "https://amazon.com.be/"
+  img: "logos/amazon.svg"
+  bg_color: "#ffffff"
+  txt_color: "#ff9900"
+  tags: ["favorite", "shopping"]
+-
+  name: "reddit"
+  url: "https://reddit.com"
+  img: "logos/reddit.svg"
+  bg_color: "#5f99cf"
+  txt_color: "#ffffff"
+-
+  name: "ebay"
+  url: "https://www.benl.ebay.be/"
+  img: "logos/ebay.svg"
+  bg_color: "#ffffff"
+  txt_color: "#000000"
+  tags: ["shopping"]
+-
+  name: "twitter"
+  url: "https://twitter.com"
+  img: "logos/twitter.svg"
+  bg_color: "#1da1f2"
+  txt_color: "#f5f8fa"
+-
+  name: "twitch"
+  url: "https://twitch.com"
+  img: "logos/twitch.svg"
+  bg_color: "#f1f1f1"
+  txt_color: "#6441a5"
+  tags: ["video"]
+-
+  name: "youtube"
+  url: "https://youtube.com"
+  img: "logos/youtube.svg"
+  bg_color: "#ffffff"
+  txt_color: "#cd201f"
+  tags: ["video","youtube"]
+-
+  name: "Portainer"
+  url: "http://192.168.86.70:9000/#!/1/docker/containers"
+  img: "logos/portainer.svg"
+  bg_color: "#ffffff"
+  txt_color: "#cd201f"
+  tags: ["homelab","docker"]
+-
+  name: "MiniMox"
+  url: "https://192.168.86.19:8006/"
+#  img: "logos/proxmox.svg"
+  tags: ["homelab","proxmox"]
+-
+  name: "aliexpress"
+  url: "https://www.aliexpress.com/category/7/computer-office.html"
+#  img: "screenshots/aliexpress.jpg"
+  img: "downloads/aliexpress.png"
+  bg_color: "#ffffff"
+  txt_color: "#ff9900"
+  tags: ["shopping"]
+-
+  name: "Tabler Icons"
+  url: "https://tabler-icons.io/"
+#  url: "https://github.com/tabler/tabler-icons/tree/master/icons"
+  img: "logos/tabler-icons.svg"
+  txt_color: "#000000"
+  tags: ["icons"]
+-
+  name: "IconScout"
+  url: "https://iconscout.com/icons/data?price=free&styles[]=line"
+  img: "logos/iconscout.svg"
+  txt_color: "#000000"
+  tags: ["icons"]
+-
+  name: "Tabler"
+  url: "https://tabler.io/"
+  img: "logos/tabler.svg"
+  txt_color: "#000000"
+  tags: ["theme","html"]
+-
+  name: "Slate @ GH"
+  url: "https://github.com/gesquive/slate/tree/master"
+  img: "screenshots/github-slate.jpg"
+  txt_color: "#000000"
+  tags: ["github","hugo","theme"]
+-
+  name: "Semaphore"
+  url: "https://192.168.86.201/project/3/history"
+#  img: "screenshots/github-slate.jpg"
+  txt_color: "#ffffff"
+  bg_color: "#005057"
+  tags: ["onminimox","lxc","ansible"]
+-
+  name: "FontAwesome"
+  url: "https://fontawesome.com/search?o=r&m=free"
+  img: "logos/fontawesome.svg"
+  txt_color: "#000000"
+  tags: ["icons"]
+-
+  name: "ServeTheHome"
+  url: "https://www.youtube.com/@ServeTheHomeVideo"
+  img: "logos/youtube-play.svg"
+  txt_color: "#000000"
+  tags: ["youtube","homelab"]
+-
+  name: "ServeTheHome"
+  url: "https://www.servethehome.com/"
+  img: "icons/web.svg"
+  txt_color: "#000000"
+  tags: ["youtube","homelab"]
+-
+  name: "PictoGrammers"
+  url: "https://pictogrammers.com/library/mdi/"
+#  img: "logos/iconscout.svg"
+  txt_color: "#000000"
+  tags: ["icons"]
+-
+  name: "vimexx"
+  url: "https://www.vimexx.be/inloggen"
+  img: "downloads/vimex.svg"
+  txt_color: "#000000"
+  tags: ["hosting"]
+-
+  name: "Versio"
+  url: "https://login.mijn.versio.nl/"
+  img: "downloads/versio.svg"
+  txt_color: "#000000"
+  tags: ["hosting"]
+-
+  name: "Versio vserver121"
+  url: "https://vserver121.axc.eu/evo/"
+  img: "downloads/vserver121.svg"
+  txt_color: "#000000"
+  tags: ["hosting"]
+-
+  name: "MXtoolbox"
+  url: "https://mxtoolbox.com/DNSLookup.aspx"
+  img: "downloads/mxtoolbox.png"
+  txt_color: "#000000"
+  tags: ["online","networking","ip","tools"]
+-
+  name: "GoogleFont 2 svg"
+  url: "https://danmarshall.github.io/google-font-to-svg-path/"
+  img: "downloads/txt2svg.svg"
+  txt_color: "#000000"
+  tags: ["icons","font","svg","online"]
+-
+  name: "Hugo Discourse"
+  url: "https://discourse.gohugo.io/"
+  img: "downloads/hugo.png"
+  txt_color: "#000000"
+  tags: ["hugo","forum"]
+-
+  name: "svg repo"
+  url: "https://www.svgrepo.com/"
+#  img: "logos/iconscout.svg"
+  txt_color: "#000000"
+  tags:
+    - "icons"
+    - "svg"
+-
+  name: "FotoEvents"
+  url: "https://fotoevents.be/"
+  img: "downloads/fotoevents.png"
+  txt_color: "#000000"
+  tags:
+    - "Wim Moortgat"
+    - "workshops"
+    - "fotografie"
+
+

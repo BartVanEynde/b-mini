@@ -1,0 +1,26 @@
+{{ define "main" }}
+<p>
+    {{- .Content -}}
+</p>
+
+
+<div class="div">
+    <h2>$tags := (index $.Site.Data.tags $tag)</h2>
+    {{ $tag := "test" }}
+
+    <table>
+        <thead><th>Key</th><th>Value</th></thead>
+        <tbody>
+        {{ $tags := (index $.Site.Data.tags $tag) }}
+        {{ with $tags }}
+            {{ range $k,$v := . }}
+                <tr><td>{{ $k }}</td><td>{{ jsonify (dict "prefix" " " "indent" "  ") $v }}</td></tr>
+            {{ end }}
+        {{ end }}
+        </tbody>
+    </table>
+</div>
+
+
+{{ end }}
+

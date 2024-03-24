@@ -1,0 +1,75 @@
+{{ define "main" }}
+<p>
+    {{- .Content -}}
+</p>
+
+<hr />
+<div class="data-dump">
+    <h2>As one dump of .Site.Data.slate.tiles</h2>
+    <pre>{{ jsonify (dict "prefix" " " "indent" "  ") .Site.Data.slate.tiles }}</pre>
+</div>
+
+<hr />
+<div class="data-dump">
+    {{ $data := newScratch }}
+    <h2>range $tag, $options := .Site.Data.slate.tiles</h2>
+	{{ range $tag, $options := .Site.Data.slate.tiles }}
+        <!-- h3>{{ $tag }}</h3 -->
+        {{/* if in $options "tags" */}}
+            <!-- pre>{{ jsonify (dict "prefix" " " "indent" "  ") $options.tags }}</pre -->
+            {{ range $t := $options.tags }}
+                <li>{{ $t }}</li>
+                {{ $data.Add $t 1 }}
+                {{/* $data := merge $data dict ( $t 1 ) */}}
+                {{/* $data := merge $data ( dict $t add ( index $data $t ) 1 ) */}}
+            {{ end }}
+        {{/* end */}}
+    {{ end }}
+    <hr />
+
+    <pre>{{ jsonify (dict "prefix" " " "indent" "  ") $data }}</pre>
+
+</div>
+
+
+<hr />
+<div class="data-dump">
+    <h2>apply .Site.Data.slate.tiles "index" "." "tags" | uniq</h2>
+
+{{ apply .Site.Data.slate.tiles "index" "." "tags" | uniq }}
+<hr />
+
+<pre>{{/* jsonify (dict "prefix" " " "indent" "  ") $data */}}</pre>
+
+</div>
+
+
+
+
+<hr />
+<div class="data-dump">
+    <h2>slateTitles</h2>
+    {{ $slateTitles := slice }}
+	{{ range $tag, $options := .Site.Data.slate.tiles }}
+        {{ range $t := $options.tags }}
+            {{ $slateTitles = append $t $slateTitles }}
+        {{ end }}
+    {{ end }}
+    <pre>{{ jsonify (dict "prefix" " " "indent" "  ") $slateTitles }}</pre>
+
+    <h2>uniq slateUniqTitles | sort</h2>
+    {{ $slateUniqTitles := $slateTitles | uniq | sort }}
+    <pre>{{ jsonify (dict "prefix" " " "indent" "  ") $slateUniqTitles }}</pre>
+
+    <h2>uniq slateUniqTitles | sort</h2>
+	{{ range $tag := $slateTitles | uniq | sort }}
+        <li>{{ $tag }} {{/* len (range (eq $slateTitles $tag)) */}} {{/*  where ( range $index, $element := $slateTitles )  $element "hosting" }}{{ . }}{{ end */}}</li>
+    
+    {{ end }}
+
+</div>
+
+
+
+
+{{ end }}
