@@ -1,4 +1,5 @@
-baseURL = 'https://b-mini.pages.dev/'
+# baseURL = 'https://b-mini.pages.dev/'
+baseURL = 'https://b2t.be/'
 languageCode = 'en-us'
 title = 'B-Mini'
 
