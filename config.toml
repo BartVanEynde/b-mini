@@ -1,8 +1,8 @@
 # baseURL = 'https://b-mini.pages.dev/'
 baseURL = 'https://b2t.be/'
 languageCode = 'en-us'
-title = 'B-Mini'
+title = 'B2T'
 
 [Params]
-copyright = '2023 &copy; Bart'
+copyright = '2024 &copy; Bart'
 
