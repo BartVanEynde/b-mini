@@ -2,7 +2,7 @@
 title: Uniq - test
 description: uniq -c from a data structure
 tags:
-- test
+- uniq
 date: 2024-03-23
 layout: "uniq"
 ---

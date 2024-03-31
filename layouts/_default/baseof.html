@@ -7,6 +7,15 @@
             <h1>{{ .Title }}</h1>
             {{- block "main" . }}{{- end }}
         </div>
+        <div class="debug">
+            {{/* printf "%#v" $.Site */}}
+            <!-- pre>{{ printf "%#v" page }}
+                {{/* printf "%#v" site.Params */}}
+            </pre>
+            <pre>{{/* jsonify (dict "prefix" " " "indent" "  ") .Site.RegularPages */}}</pre -->
+
+        </div>
         {{- partial "footer.html" . -}}
     </body>
 </html>
+
