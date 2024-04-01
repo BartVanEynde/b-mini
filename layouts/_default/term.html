@@ -3,7 +3,11 @@
 {{- range .Pages }}
     <li>
         <a href="{{ .Permalink }}">
-            {{ .Title }}
+            {{ if (index $.Site.Data.tags .Title).Title }}
+                {{ (index $.Site.Data.tags .Title).Title }}
+            {{ else }}
+                {{ .Title }}
+            {{ end }}
             <small><time>{{ .Date | time.Format (i18n "posts.date") }}</time></small>
         </a>
     </li>
@@ -13,11 +17,14 @@
 
 
 
-<h3>$tags := (index $.Site.Data.tags .Title)</h3>
+<h3>Tag info</h3>
 <p>
 
-    <table>
-        <thead><th>Key</th><th>Value</th></thead>
+    <table class="zebra">
+        <thead>
+            <th>Key</th>
+            <th>Value</th>
+        </thead>
         <tbody>
         {{ $tags := (index $.Site.Data.tags .Title) }}
         {{ with $tags }}
@@ -30,57 +37,6 @@
 
 </p>
 
-
-<h3>with (index $.Site.Data.tags .Title).Title</h3>
-<p>
-    {{ with (index $.Site.Data.tags .Title).Title }}
-        {{ . }}
-    {{ end }}
-
-</p>
-
-
-<h3>if (index $.Site.Data.tags .Title).Title</h3>
-<p>
-    {{ if (index $.Site.Data.tags .Title).Title }}
-        if - .Title = {{ (index $.Site.Data.tags .Title).Title }}
-    {{ else }}
-        if - NO .Title
-    {{ end }}
-
-</p>
-
-
-<h3>if (index $.Site.Data.tags .Title).Website</h3>
-<p>
-    {{ if (index $.Site.Data.tags .Title).Website }}
-        if - .Website = {{ (index $.Site.Data.tags .Title).Website }}
-    {{ else }}
-        if - NO .Website
-    {{ end }}
-
-</p>
-
-
-<h3>if (index $.Site.Data.tags .Title).DoesNotExits</h3>
-<p>
-    {{ if (index $.Site.Data.tags .Title).DoesNotExits }}
-        if - .DoesNotExits = {{ (index $.Site.Data.tags .Title).DoesNotExits }}
-    {{ else }}
-        if - NO .DoesNotExits
-    {{ end }}
-
-</p>
-
-<h3>if (index $.Site.Data.tags "NoSuchPage").Title</h3>
-<p>
-    {{ if (index $.Site.Data.tags "NoSuchPage").Title }}
-        if - .Title = {{ (index $.Site.Data.tags "NoSuchPage").Title }}
-    {{ else }}
-        if - NO .Title
-    {{ end }}
-
-</p>
 
 
 

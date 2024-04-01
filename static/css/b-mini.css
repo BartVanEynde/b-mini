@@ -149,6 +149,31 @@ body {
   }
 
 
+
+.zebra tbody tr:nth-child(even) {
+  background-color: #ccc;
+}
+
+table.zebra , table.zebra th, table.zebra td {
+  /* border: 1px solid black; */
+  border-collapse: collapse;
+}
+table.zebra th {
+  background-color: #333;
+  color: white;
+  padding: 5px;
+}
+table.zebra td {
+  padding: 5px;
+}
+table.zebra th {
+  text-align: left;
+}
+
+
+
+
+
 @media (max-width: 700px) {
   .menu-button-container {
     display: flex;

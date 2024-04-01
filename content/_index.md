@@ -1,7 +1,6 @@
 ---
 title: Welcome on B2T
 tags:
-- thistagwillnothaveadatayamlfile
 draft: False
 ---
 

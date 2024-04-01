@@ -1,90 +1,69 @@
 {{ define "main" }}
-<ul id="posts">
-{{- range .Pages }}
-    <li>
-        <a href="{{ .Permalink }}">
-            {{ .Title }}
-            <small><time>{{ .Date | time.Format (i18n "posts.date") }}</time></small>
-        </a>
-    </li>
-    
-{{- end }}
-</ul>
 
 
 
-<h3>$tags := (index $.Site.Data.tags .Title)</h3>
+
 <p>
-
-    <table>
-        <thead><th>Key</th><th>Value</th></thead>
+    <table class="zebra">
+        <thead>
+            <th>&nbsp;</th>
+            <th>Tag</th>
+            <th>#</th>
+            <th>Description</th>
+            <th>WWW</th>
+            <th>FB</th>
+            <th>Insta</th>
+        </thead>
         <tbody>
-        {{ $tags := (index $.Site.Data.tags .Title) }}
-        {{ with $tags }}
-            {{ range $k,$v := . }}
-                <tr><td>{{ $k }}</td><td>{{ jsonify (dict "prefix" " " "indent" "  ") $v }}</td></tr>
-            {{ end }}
-        {{ end }}
+        {{/* range .Site.Taxonomies.tags  */}}
+        {{ range sort .Site.Taxonomies.tags "Count" "desc" }}
+        {{ $title := .Page.Title }}
+        {{ $count := .Count }}
+        {{ $permalink := .Page.Permalink }}
+            <tr id="{{ $title }}">
+                <td>
+                    {{ with (index $.Site.Data.tags $title).icon }}
+                        <img src="{{ . }}" alt="Icon" width="15" height="15">
+                    {{ else }}
+                        <img src="/fontawesomeicons/1687991584256.png" alt="Icon" width="15" height="15">
+                    {{ end }}
+                </td>
+                <td>
+                    <a href="{{ $permalink }}">{{ $title }}</a>
+                </td>
+                <td>
+                    {{ $count }}
+                </td>
+                <td>
+                    {{ with (index $.Site.Data.tags $title).Description }}{{ delimit . "<br />" }}{{ end }}
+                </td>
+                <td>
+                    {{ with (index $.Site.Data.tags $title).Website }}<a href="{{ . }}">www</a>{{ end }}
+                </td>
+                <td>
+                    {{ with (index $.Site.Data.tags $title).Facebook }}<a href="{{ . }}">FB</a>{{ end }}
+                </td>
+                <td>
+                    {{ with (index $.Site.Data.tags $title).Instagram }}<a href="{{ . }}">Insta</a>{{ end }}
+                </td>
+            </tr>
+        {{- end }}
         </tbody>
     </table>
-
 </p>
 
-
-<h3>with (index $.Site.Data.tags .Title).Title</h3>
-<p>
-    {{ with (index $.Site.Data.tags .Title).Title }}
-        {{ . }}
-    {{ end }}
-
-</p>
-
-
-<h3>if (index $.Site.Data.tags .Title).Title</h3>
-<p>
-    {{ if (index $.Site.Data.tags .Title).Title }}
-        if - .Title = {{ (index $.Site.Data.tags .Title).Title }}
-    {{ else }}
-        if - NO .Title
-    {{ end }}
-
-</p>
-
-
-<h3>if (index $.Site.Data.tags .Title).Website</h3>
-<p>
-    {{ if (index $.Site.Data.tags .Title).Website }}
-        if - .Website = {{ (index $.Site.Data.tags .Title).Website }}
-    {{ else }}
-        if - NO .Website
-    {{ end }}
-
-</p>
-
-
-<h3>if (index $.Site.Data.tags .Title).DoesNotExits</h3>
-<p>
-    {{ if (index $.Site.Data.tags .Title).DoesNotExits }}
-        if - .DoesNotExits = {{ (index $.Site.Data.tags .Title).DoesNotExits }}
-    {{ else }}
-        if - NO .DoesNotExits
-    {{ end }}
-
-</p>
-
-<h3>if (index $.Site.Data.tags "NoSuchPage").Title</h3>
-<p>
-    {{ if (index $.Site.Data.tags "NoSuchPage").Title }}
-        if - .Title = {{ (index $.Site.Data.tags "NoSuchPage").Title }}
-    {{ else }}
-        if - NO .Title
-    {{ end }}
-
-</p>
-
-
-
-
+<h3>List</h3>
+<ul id="posts">
+    {{- range .Pages }}
+        <li>
+            <a href="{{ .Permalink }}">
+                {{ .Title }}
+                <!-- small><time>{{ .Date | time.Format "1999-12-31" }}</time></small -->
+            </a>
+        </li>
+        
+    {{- end }}
+    </ul>
 
 
 <div>( _default\taxonomy - Kind='{{ .Kind }}' )</div>
