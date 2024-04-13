@@ -10,4 +10,4 @@ Welcome on this test-site
 
 sorry, no real content here, just a playground with [Hugo](https://gohugo.io/) stuf that isn't working for me...
 
-B2T = bARt = My first name... ( a [Numeronym](https://en.wikipedia.org/wiki/Numeronym) like i18n, k8s, ... )
+B2T = bARt = My first name... ( a [Numeronym](https://en.wikipedia.org/wiki/Numeronym) like i18n, k8s, ... and Jan "ess-twelve-en" Scherpenhuizen )

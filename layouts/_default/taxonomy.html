@@ -10,6 +10,7 @@
             <th>Tag</th>
             <th>#</th>
             <th>Description</th>
+            <th>Weight</th>
             <th>WWW</th>
             <th>FB</th>
             <th>Insta</th>
@@ -36,6 +37,9 @@
                 </td>
                 <td>
                     {{ with (index $.Site.Data.tags $title).Description }}{{ delimit . "<br />" }}{{ end }}
+                </td>
+                <td>
+                    {{ with (index $.Site.Data.tags $title).Weight | default 10 }} {{ . }} {{ end }}
                 </td>
                 <td>
                     {{ with (index $.Site.Data.tags $title).Website }}<a href="{{ . }}">www</a>{{ end }}
