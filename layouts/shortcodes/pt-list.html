@@ -14,7 +14,7 @@
                 {{ $options.description | safeHTML}}
                 {{ with $options.note | safeHTML }}<br /><br /><strong>Note:</strong> {{ . }}{{ end }}
                 {{ with $options.image }}<br /><br />Image: {{ . }}{{ end }}
-                {{ with $options.repository }}<br /><br /><a href="{{ $options.repository.url }}">Repository</a> &gt; <a href="{{ $options.repository.url }}/{{ $options.repository.stackfile }}">{{ $options.repository.stackfile }}</a> {{ end }}
+                {{ with $options.repository }}<br /><br /><a href="{{ $options.repository.url }}">Repository</a> &gt; <a href="{{ $options.repository.url }}/tree/master/{{ $options.repository.stackfile }}">{{ $options.repository.stackfile }}</a> {{ end }}
 
                 {{ with $options.category }}<br /><br />Category: {{ delimit . ", " }}{{ end }}
                 {{ with $options.categories }}<br /><br />Category: {{ delimit . ", " }}{{ end }}
