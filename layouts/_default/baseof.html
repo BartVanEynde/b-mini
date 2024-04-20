@@ -4,7 +4,7 @@
     <body translate="no">
         {{- partial "header.html" . -}}
         <div class="main">
-            <h1>{{ .Title }}</h1>
+            {{ if not ( eq .Kind "term" ) }}<h1>{{ .Title }}</h1>{{ end }}
             {{- block "main" . }}{{- end }}
         </div>
         <div class="debug">

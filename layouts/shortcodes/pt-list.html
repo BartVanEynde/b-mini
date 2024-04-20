@@ -1,0 +1,38 @@
+<table class="zebra">
+    <tr>
+        <th>Title</th>
+        <th>Desc</th>
+        <th>Ports</th>
+        <th>Env / Vol</th>
+        {{/* <th>dump</th> */}}
+    </tr>
+    {{ $slateTitles := slice }}
+	{{ range $key, $options := .Site.Data.portainer_templates.templates }}
+        <tr>
+            <td>{{ $options.title }}</td>
+            <td style="vertical-align: top;">
+                {{ $options.description | safeHTML}}
+                {{ with $options.note | safeHTML }}<br /><br /><strong>Note:</strong> {{ . }}{{ end }}
+                {{ with $options.image }}<br /><br />Image: {{ . }}{{ end }}
+                {{ with $options.repository }}<br /><br /><a href="{{ $options.repository.url }}">Repository</a> &gt; <a href="{{ $options.repository.url }}/{{ $options.repository.stackfile }}">{{ $options.repository.stackfile }}</a> {{ end }}
+
+                {{ with $options.category }}<br /><br />Category: {{ delimit . ", " }}{{ end }}
+                {{ with $options.categories }}<br /><br />Category: {{ delimit . ", " }}{{ end }}
+                
+            </td>
+            <td>{{ range $p := $options.ports }}{{ $p }}<br />{{ end }}</td>
+
+            <td style="vertical-align: top;">
+                {{ range $e,$ee := $options.env }}
+                    {{ with $ee.name }}{{.}}="{{ with $ee.set }}{{.}}{{else}}{{ with $ee.default }}{{.}}{{end}}{{end}}"{{ with $ee.label }} #{{.}}{{end}}{{end}}<br />
+                {{ end }}
+
+                {{ range $v,$vv := $options.volumes }}
+                    <br />{{ with $vv.bind }}{{.}}:{{end}}{{ with $vv.container }}{{.}}{{end}}
+                {{ end }}
+            </td>
+
+            {{/* <td><pre>{{ jsonify (dict "prefix" " " "indent" "  ") $options }}</pre></td> */}} 
+        </tr>
+    {{ end }}
+</table>
