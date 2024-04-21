@@ -13,7 +13,6 @@
             <td style="vertical-align: top;">
                 {{ $options.description | safeHTML}}
                 {{ with $options.note | safeHTML }}<br /><br /><strong>Note:</strong> {{ . }}{{ end }}
-                {{ with $options.image }}<br /><br /><strong>Image:</strong> {{ . }} - {{ index ( split . ":" ) 0 }}   {{ end }}
                 {{ with $options.image }}<br /><br /><strong>Image:</strong> <a href="https://hub.docker.com/r/{{ index ( split . ":" ) 0 }}">{{ . }}</a>{{ end }}
 
                 {{ with $options.repository }}<br /><br /><a href="{{ $options.repository.url }}">Repository</a> &gt; <a href="{{ $options.repository.url }}/tree/master/{{ $options.repository.stackfile }}">{{ $options.repository.stackfile }}</a> {{ end }}
