@@ -7,17 +7,19 @@
         {{/* <th>dump</th> */}}
     </tr>
     {{ $slateTitles := slice }}
-	{{ range $key, $options := .Site.Data.portainer_templates.templates }}
+	{{ range $key, $options := ( sort .Site.Data.portainer_templates.templates ".title" "asc" ) }}
         <tr>
-            <td>{{ $options.title }}</td>
+            <td><strong>{{ $options.title }}</strong></td>
             <td style="vertical-align: top;">
                 {{ $options.description | safeHTML}}
                 {{ with $options.note | safeHTML }}<br /><br /><strong>Note:</strong> {{ . }}{{ end }}
-                {{ with $options.image }}<br /><br />Image: {{ . }}{{ end }}
+                {{ with $options.image }}<br /><br /><strong>Image:</strong> {{ . }} - {{ index ( split . ":" ) 0 }}   {{ end }}
+                {{ with $options.image }}<br /><br /><strong>Image:</strong> <a href="https://hub.docker.com/r/{{ index ( split . ":" ) 0 }}">{{ . }}</a>{{ end }}
+
                 {{ with $options.repository }}<br /><br /><a href="{{ $options.repository.url }}">Repository</a> &gt; <a href="{{ $options.repository.url }}/tree/master/{{ $options.repository.stackfile }}">{{ $options.repository.stackfile }}</a> {{ end }}
 
-                {{ with $options.category }}<br /><br />Category: {{ delimit . ", " }}{{ end }}
-                {{ with $options.categories }}<br /><br />Category: {{ delimit . ", " }}{{ end }}
+                {{ with $options.category }}<br /><br /><strong>Category:</strong> {{ delimit . ", " }}{{ end }}
+                {{ with $options.categories }}<br /><br /><strong>Category:</strong> {{ delimit . ", " }}{{ end }}
                 
             </td>
             <td>{{ range $p := $options.ports }}{{ $p }}<br />{{ end }}</td>
