@@ -5,4 +5,4 @@ title = 'B2T'
 
 [Params]
 copyright = '2024 &copy; Bart'
-
+mainSections = ['pages','uniq']

@@ -30,7 +30,7 @@
                     {{ end }}
                 </td>
                 <td>
-                    <a href="{{ $permalink }}">{{ $title }}</a>
+                    <a href="{{ $permalink }}">{{ with (index $.Site.Data.tags $title).Title | default $title | humanize }} {{ . }} {{ end }}</a>
                 </td>
                 <td>
                     {{ $count }}

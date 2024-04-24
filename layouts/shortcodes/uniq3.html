@@ -1,0 +1,17 @@
+{{ $q := slice "d" "a" "b" "c" "b" "b" "a" "a" "b" "c" }}
+
+<div class="data-dump">
+    <h2>slice "d" "a" "b" "c" "b" "b" "a" "a" "b" "c" | uniq</h2>
+    <pre>{{ jsonify (dict "prefix" " " "indent" "  ") ( $q | uniq ) }}</pre>
+</div>
+
+
+<div class="data-dump">
+    <h2>$s.Add $qq 1</h2>
+
+{{ $s := newScratch }}
+{{ range $qq := $q }}{{ $s.Add $qq 1 }}{{ end }}
+<ul>{{ range $qq := $q | uniq | sort }}<li>{{ $qq }}={{ $s.Get $qq }}</li>{{ end }}</ul>
+
+</div>
+
