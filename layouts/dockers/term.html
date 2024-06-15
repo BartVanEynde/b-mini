@@ -1,0 +1,107 @@
+{{ define "main" }}
+{{ $title := .Title }}
+
+
+
+{{ $dockers := slice }}
+
+
+{{ if eq ( $title| lower ) "none" }}
+    {{ range $key, $options := .Site.Data.portainer_templates.templates }}
+        {{ if ( and ( not $options.category ) ( not $options.categories ) ) }}
+            {{ $dockers = append $options $dockers }}
+        {{ end }}
+    {{ end }}
+
+{{ else }}
+    {{ range $key, $options := .Site.Data.portainer_templates.templates }}
+        {{ range $ptcat := $options.category }}
+            {{ if eq ( replaceRE "[^A-Za-z0-9]" "" $ptcat | lower ) ( $title| lower )  }}
+                {{ $dockers = append $options $dockers }}
+            {{ end }}
+        {{ end }}
+        {{ range $ptcat := $options.categories }}
+            {{ if eq ( replaceRE "[^A-Za-z0-9]" "" $ptcat | lower ) ( $title| lower )  }}
+                {{ $dockers = append $options $dockers }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+
+{{ end }}
+
+
+
+
+
+{{ if ( gt ( len $dockers ) 0 ) }}
+<h2>Found solutions:</h2>
+{{/*
+{{ range $key, $options := ( sort $dockers ".title" "asc" ) }}
+
+<pre>{{ jsonify (dict "prefix" " " "indent" "  ") $options }}</pre>
+
+{{ end }}
+*/}}
+
+
+
+
+
+<table class="zebra">
+    <tr>
+        <th>Title</th>
+        <th>Desc</th>
+        <th>Ports</th>
+        <th>Env / Vol</th>
+    </tr>
+	{{ range $key, $options := ( sort $dockers ".title" "asc" ) }}
+        <tr>
+            <td><strong>{{ $options.title }}</strong></td>
+            <td style="vertical-align: top;">
+                {{ $options.description | safeHTML}}
+                {{ with $options.note | safeHTML }}<br /><br /><strong>Note:</strong> {{ . }}{{ end }}
+                {{ with $options.image }}<br /><br /><strong>Image:</strong> <a href="https://hub.docker.com/r/{{ index ( split . ":" ) 0 }}">{{ . }}</a>{{ end }}
+
+                {{ with $options.repository }}<br /><br /><a href="{{ $options.repository.url }}">Repository</a> &gt; <a href="{{ $options.repository.url }}/tree/master/{{ $options.repository.stackfile }}">{{ $options.repository.stackfile }}</a> {{ end }}
+
+                {{ with $options.category }}<br /><br /><strong>Category:</strong> {{ delimit . ", " }}{{ end }}
+                {{ with $options.categories }}<br /><br /><strong>Category:</strong> {{ delimit . ", " }}{{ end }}
+                
+            </td>
+            <td>{{ range $p := $options.ports }}{{ $p }}<br />{{ end }}</td>
+
+            <td style="vertical-align: top;">
+                {{ range $e,$ee := $options.env }}
+                    {{ with $ee.name }}{{.}}="{{ with $ee.set }}{{.}}{{else}}{{ with $ee.default }}{{.}}{{end}}{{end}}"{{ with $ee.label }} #{{.}}{{end}}{{end}}<br />
+                {{ end }}
+
+                {{ range $v,$vv := $options.volumes }}
+                    <br />{{ with $vv.bind }}{{.}}:{{end}}{{ with $vv.container }}{{.}}{{end}}
+                {{ end }}
+            </td>
+        </tr>
+    {{ end }}
+</table>
+
+
+
+
+
+
+
+
+{{ end }}
+
+
+
+
+
+
+
+
+
+
+
+<div>( layout\dockers\term - Kind='{{ .Kind }}' )</div>
+
+{{ end }}

@@ -1,32 +1,7 @@
 {{ define "main" }}
 {{ $title := .Title }}
 
-{{ with $ws := (index $.Site.Data.tags $title).Website }}
-<a href="{{ $ws }}">
-{{end}}
 
-<h1>
-    {{ with (index $.Site.Data.tags .Title).icon }}
-    <img src="{{ . }}" alt="Icon" width="30" height="30">
-    {{ else }}
-    <img src="/fontawesomeicons/1687991584256.png" alt="Icon" width="30" height="30">
-    {{ end }}
-
-    {{ with (index $.Site.Data.tags $title).Title }}{{.}}{{else}}{{ $title }}{{end}}
-</h1>
-
-{{ with (index $.Site.Data.tags $title).Website }}
-</a>
-{{ end }}
-
-{{ with $desc := (index $.Site.Data.tags $title).Description }}
-    <h2>Description</h2>
-    <ul>
-    {{ range $d := $desc }}
-        <li>{{ $d }}</li>
-    {{ end }}
-    </ul>
-{{ end }}
 
 
 <h2>Pages with "{{ $title }}" as tag</h2>
@@ -34,44 +9,13 @@
 {{- range .Pages }}
     <li>
         <a href="{{ .Permalink }}">
-            {{ if (index $.Site.Data.tags .Title).Title }}
-                {{ (index $.Site.Data.tags .Title).Title }}
-            {{ else }}
                 {{ .Title }}
-            {{ end }}
             <small><time>{{ .Date | time.Format (i18n "posts.date") }}</time></small>
         </a>
     </li>
     
 {{- end }}
 </ul>
-
-
-
-<h3>Tag info</h3>
-<p>
-
-    <table class="zebra">
-        <thead>
-            <th>Key</th>
-            <th>Value</th>
-        </thead>
-        <tbody>
-        {{ $tags := (index $.Site.Data.tags .Title) }}
-        {{ with $tags }}
-            {{ range $k,$v := . }}
-                <tr><td>{{ $k }}</td><td>{{ jsonify (dict "prefix" " " "indent" "  ") $v }}</td></tr>
-            {{ end }}
-        {{ end }}
-        </tbody>
-    </table>
-
-</p>
-
-
-
-
-
 
 
 <div>( _default\term - Kind='{{ .Kind }}' )</div>

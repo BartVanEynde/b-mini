@@ -1,0 +1,23 @@
+{{/* Show this uniq list of categories only while in draft */}}
+
+{{ $drafts := where .Site.RegularPages ".Draft" "==" true }}
+{{ if $drafts }}
+    {{ $ptcats := slice "NONE" }}
+    {{ range $key, $options := .Site.Data.portainer_templates.templates }}
+        {{ range $ptcat := $options.category }}
+            {{ $ptcats = append ( replaceRE "[^A-Za-z0-9]" "" $ptcat | lower ) $ptcats }}
+        {{ end }}
+        {{ range $ptcat := $options.categories }}
+            {{ $ptcats = append ( replaceRE "[^A-Za-z0-9]" "" $ptcat | lower ) $ptcats }}
+        {{ end }}
+    {{ end }}
+
+<pre>
+dockers:
+{{- range $pt := $ptcats | sort | uniq }}
+- {{ $pt -}}
+{{ end }}
+</pre>
+   
+{{ end }}
+

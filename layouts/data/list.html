@@ -1,0 +1,7 @@
+{{ define "main" }}
+<p>{{- .Content -}}</p>
+
+<p>{{- partial "posts-by-section.html" . -}}</p>
+
+<div>( data\list - Kind='{{ .Kind }}' )</div>
+{{ end }}

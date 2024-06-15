@@ -4,10 +4,10 @@ title: "debug"
 draft: false
 tags:
 - test
-- nok
+- debug
 ---
 
 debug
 
-{{ partial "debug.html" . }}
+{{< debug >}}
 

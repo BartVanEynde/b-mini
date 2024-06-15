@@ -1,61 +1,5 @@
 {{ define "main" }}
 
-
-
-
-<p>
-    <table class="zebra">
-        <thead>
-            <th>&nbsp;</th>
-            <th>Tag</th>
-            <th>#</th>
-            <th>Description</th>
-            <th>Weight</th>
-            <th>WWW</th>
-            <th>FB</th>
-            <th>Insta</th>
-        </thead>
-        <tbody>
-        {{/* range .Site.Taxonomies.tags  */}}
-        {{ range sort .Site.Taxonomies.tags "Count" "desc" }}
-        {{ $title := .Page.Title }}
-        {{ $count := .Count }}
-        {{ $permalink := .Page.Permalink }}
-            <tr id="{{ $title }}">
-                <td>
-                    {{ with (index $.Site.Data.tags $title).icon }}
-                        <img src="{{ . }}" alt="Icon" width="15" height="15">
-                    {{ else }}
-                        <img src="/fontawesomeicons/1687991584256.png" alt="Icon" width="15" height="15">
-                    {{ end }}
-                </td>
-                <td>
-                    <a href="{{ $permalink }}">{{ with (index $.Site.Data.tags $title).Title | default $title | humanize }} {{ . }} {{ end }}</a>
-                </td>
-                <td>
-                    {{ $count }}
-                </td>
-                <td>
-                    {{ with (index $.Site.Data.tags $title).Description }}{{ delimit . "<br />" }}{{ end }}
-                </td>
-                <td>
-                    {{ with (index $.Site.Data.tags $title).Weight | default 10 }} {{ . }} {{ end }}
-                </td>
-                <td>
-                    {{ with (index $.Site.Data.tags $title).Website }}<a href="{{ . }}">www</a>{{ end }}
-                </td>
-                <td>
-                    {{ with (index $.Site.Data.tags $title).Facebook }}<a href="{{ . }}">FB</a>{{ end }}
-                </td>
-                <td>
-                    {{ with (index $.Site.Data.tags $title).Instagram }}<a href="{{ . }}">Insta</a>{{ end }}
-                </td>
-            </tr>
-        {{- end }}
-        </tbody>
-    </table>
-</p>
-
 <h3>List</h3>
 <ul id="posts">
     {{- range .Pages }}
@@ -67,7 +11,7 @@
         </li>
         
     {{- end }}
-    </ul>
+</ul>
 
 
 <div>( _default\taxonomy - Kind='{{ .Kind }}' )</div>

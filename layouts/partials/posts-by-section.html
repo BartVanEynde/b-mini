@@ -1,0 +1,15 @@
+<h3>{{ i18n "posts.title" }}</h3>
+<ul id="posts">
+{{- range (where site.RegularPages "Section" "==" .Section ) }}
+
+    <li>
+        <a href="/{{ .Section }}/">
+            [{{ .Section | humanize }}]
+        </a>
+        <a href="{{ .Permalink }}">
+            {{ .Title }}
+        </a>
+    </li>
+
+{{- end }}
+</ul>

@@ -1,0 +1,18 @@
+{{ len (where .Site.RegularPages ".Draft" "==" true ) }}
+{{ len (where .Site.RegularPages "Params.draft" "==" true ) }}
+
+
+
+{{ $drafts := where .Site.RegularPages ".Draft" "==" true }}
+{{ if $drafts }}
+    There are drafts
+{{ else }}
+    There are no drafts
+{{ end }}
+
+
+
+Status: OK
+
+
+<!-- https://discourse.gohugo.io/t/solved-select-all-drafts-with-where/11626 -->

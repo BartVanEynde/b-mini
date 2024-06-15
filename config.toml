@@ -5,4 +5,12 @@ title = 'B2T'
 
 [Params]
 copyright = '2024 &copy; Bart'
-mainSections = ['pages','uniq']
+mainSections = ['pages','uniq','data']
+
+[taxonomies]
+tag = "tags"
+docker = "dockers"
+
+[permalinks]
+# tags = "/tags/:slug/"
+dockers = "/data/dockers/:slug/"
