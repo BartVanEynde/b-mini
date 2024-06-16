@@ -1,0 +1,19 @@
+{{ define "main" }}
+
+<h3>List</h3>
+<ul id="posts">
+    {{- range .Pages }}
+        <li>
+            <a href="{{ .Permalink }}">
+                {{ .Title }}
+                <!-- small><time>{{ .Date | time.Format "1999-12-31" }}</time></small -->
+            </a>
+        </li>
+        
+    {{- end }}
+</ul>
+
+
+<div>( layout\dockers\taxonomy - Kind='{{ .Kind }}' )</div>
+
+{{ end }}

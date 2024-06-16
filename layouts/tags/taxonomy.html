@@ -12,8 +12,8 @@
             <th>Description</th>
             <th>Weight</th>
             <th>WWW</th>
-            <th>FB</th>
-            <th>Insta</th>
+            <!-- th>FB</th>
+            <th>Insta</th -->
         </thead>
         <tbody>
         {{/* range .Site.Taxonomies.tags  */}}
@@ -44,12 +44,12 @@
                 <td>
                     {{ with (index $.Site.Data.tags $title).Website }}<a href="{{ . }}">www</a>{{ end }}
                 </td>
-                <td>
+                <!-- td>
                     {{ with (index $.Site.Data.tags $title).Facebook }}<a href="{{ . }}">FB</a>{{ end }}
                 </td>
                 <td>
                     {{ with (index $.Site.Data.tags $title).Instagram }}<a href="{{ . }}">Insta</a>{{ end }}
-                </td>
+                </td -->
             </tr>
         {{- end }}
         </tbody>

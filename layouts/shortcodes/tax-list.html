@@ -1,0 +1,28 @@
+{{/* https://discourse.gohugo.io/t/howto-delimiter-separated-tags/146/7 */}}
+{{/* https://gohugo.io/functions/collections/indexfunction/ */}}
+{{/* <pre>
+{{ jsonify (dict "prefix" " " "indent" "  ") .Site.Taxonomies.dockers }}
+</pre> */}}
+
+{{ $first_docker := "" }}
+{{ $last_docker := "" }}
+
+{{ $found_docker := 0 }}
+{{ $prev_docker := "" }}
+{{ $next_docker := "" }}
+
+{{ range $key, $options := .Site.Taxonomies.dockers }}
+    {{ if eq $first_docker "" }}
+        {{ $first_docker = $key }}
+    {{ end }}
+
+
+
+
+    {{ $last_docker = $key }}
+{{ end }}
+
+
+
+
+{{ $first_docker }} - {{ $last_docker }}

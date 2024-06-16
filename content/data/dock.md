@@ -3,7 +3,7 @@ date: 2024-06-14
 title: Test Docker taxonomy
 draft: false
 dockers:
-- NONE
+- none
 - 3dprinters
 - accessproxy
 - adblocking
@@ -146,7 +146,16 @@ dockers:
 - wiki
 ---
 
-test to see if this works...
+## Dock
 
+### What works
+* This page holds all the tags from the json
+* When in Draft mode (hugo server -D) you will get the current list from the json & wou will need to update the front end code with this info
+* the term pages work like a charm: [/data/dockers/wiki/](/data/dockers/wiki/)
+
+### What doesn't work yet
+* The overview taxonomy page is not yet on the correct page 
+    * I want: [/data/dockers/](/data/dockers/) - it shows a _default/list.html and not the _default/taxonomy.html.
+    * I have: [/dockers/](/dockers/) - this show the correct _default/taxonomy.html, but is in the wrong place.
 
 {{<pt-taxonomy>}}

@@ -4,29 +4,70 @@
 
 
 {{ $dockers := slice }}
+{{ $unsortedcats := slice }}
 
-
-{{ if eq ( $title| lower ) "none" }}
-    {{ range $key, $options := .Site.Data.portainer_templates.templates }}
-        {{ if ( and ( not $options.category ) ( not $options.categories ) ) }}
+{{ range $key, $options := .Site.Data.portainer_templates.templates }}
+    {{ range $ptcat := $options.category }}
+        {{ if eq ( replaceRE "[^A-Za-z0-9]" "" $ptcat | lower ) ( $title| lower )  }}
             {{ $dockers = append $options $dockers }}
         {{ end }}
+        {{ $unsortedcats = append ( replaceRE "[^A-Za-z0-9]" "" $ptcat | lower ) $unsortedcats }}
+    {{ end }}
+    {{ range $ptcat := $options.categories }}
+        {{ if eq ( replaceRE "[^A-Za-z0-9]" "" $ptcat | lower ) ( $title| lower )  }}
+            {{ $dockers = append $options $dockers }}
+            {{ $d_cat := "NONE" }}
+        {{ end }}
+        {{ $unsortedcats = append ( replaceRE "[^A-Za-z0-9]" "" $ptcat | lower ) $unsortedcats }}
     {{ end }}
 
-{{ else }}
-    {{ range $key, $options := .Site.Data.portainer_templates.templates }}
-        {{ range $ptcat := $options.category }}
-            {{ if eq ( replaceRE "[^A-Za-z0-9]" "" $ptcat | lower ) ( $title| lower )  }}
-                {{ $dockers = append $options $dockers }}
-            {{ end }}
+    {{ if ( and ( not $options.category ) ( not $options.categories ) ) }}
+        {{ if ( eq ( $title| lower ) "none" ) }}
+            {{ $dockers = append $options $dockers }}
+            {{ $d_cat := "none" }}
         {{ end }}
-        {{ range $ptcat := $options.categories }}
-            {{ if eq ( replaceRE "[^A-Za-z0-9]" "" $ptcat | lower ) ( $title| lower )  }}
-                {{ $dockers = append $options $dockers }}
-            {{ end }}
-        {{ end }}
+        {{ $unsortedcats = append "NONE" $unsortedcats }}
     {{ end }}
 
+{{ end }}
+
+
+{{/* https://discourse.gohugo.io/t/prev-next-taxonomy-term-in-taxonomy-lists/2563/2 */}}
+{{ $allcats := dict }}
+{{ $c_first := "" }}
+{{ $c_last := "" }}
+{{ $c_prev := "" }}
+{{ $c_next := "" }}
+{{ $c_prevprev := "" }}
+{{ $c_nextnext := "" }}
+{{ $c_tmp_prev := "" }}
+{{ $countcats := newScratch }}
+{{ range $cat := $unsortedcats }}{{ $countcats.Add $cat 1 }}{{ end }}
+{{ range $cat := $unsortedcats | uniq | sort }}
+    {{ $allcats = merge $allcats ( dict $cat ($countcats.Get $cat) ) }}
+    {{ if eq $c_first "" }}
+        {{ $c_first = $cat }}
+    {{ end }}
+
+    {{ if eq $cat ( $title| lower ) }}
+        {{ $c_prev = $c_last }}
+    {{ end }}
+    
+    {{ if eq $c_last ( $title| lower ) }}
+        {{ $c_next = $cat }}
+    {{ end }}
+    
+    {{ if eq $cat ( $title| lower ) }}
+        {{ $c_prevprev = $c_tmp_prev }}
+    {{ end }}
+    
+    {{ if eq $c_tmp_prev ( $title| lower ) }}
+        {{ $c_nextnext = $cat }}
+    {{ end }}
+    
+
+    {{ $c_tmp_prev = $c_last }}
+    {{ $c_last = $cat }}
 {{ end }}
 
 
@@ -34,7 +75,7 @@
 
 
 {{ if ( gt ( len $dockers ) 0 ) }}
-<h2>Found solutions:</h2>
+<h2>Grep with "{{ $title| lower }}" on the JSON-data ({{ len $dockers }})</h2>
 {{/*
 {{ range $key, $options := ( sort $dockers ".title" "asc" ) }}
 
@@ -43,9 +84,17 @@
 {{ end }}
 */}}
 
-
-
-
+<p>
+    <a href="/dockers/">Dockers</a> / <a href="/data/dockers/">(/data/Dockers)</a> &gt;&gt; 
+    <a href="/data/dockers/{{ $c_first }}">{{ $c_first | humanize }}</a> = 
+    {{ if and (ne $c_prevprev "") (ne $c_prevprev $c_first) }}<a href="/data/dockers/{{ $c_prevprev }}">{{ $c_prevprev | humanize }}</a> - {{ end }}
+    {{ if and (ne $c_prev "") (ne $c_prev $c_first) }}<a href="/data/dockers/{{ $c_prev }}">{{ $c_prev | humanize }}</a> - {{ end }}
+    {{ ( $title| lower ) }}
+    {{/* if ne $c_next "" }} - <a href="/data/dockers/{{ $c_next }}">{{ $c_next | humanize }}</a>{{ end */}}
+    {{ if and (ne $c_next "") (ne $c_next $c_last) }} - <a href="/data/dockers/{{ $c_next }}">{{ $c_next | humanize }}</a>{{ end }}
+    {{ if and (ne $c_nextnext "") (ne $c_nextnext $c_last) }} - <a href="/data/dockers/{{ $c_nextnext }}">{{ $c_nextnext | humanize }}</a>{{ end }}
+    {{ if (ne ( $title| lower ) $c_last) }} = <a href="/data/dockers/{{ $c_last }}">{{ $c_last | humanize }}</a>{{ end }}
+</p>
 
 <table class="zebra">
     <tr>
@@ -58,7 +107,7 @@
         <tr>
             <td><strong>{{ $options.title }}</strong></td>
             <td style="vertical-align: top;">
-                {{ $options.description | safeHTML}}
+                {{ $options.description | safeHTML | markdownify  }}
                 {{ with $options.note | safeHTML }}<br /><br /><strong>Note:</strong> {{ . }}{{ end }}
                 {{ with $options.image }}<br /><br /><strong>Image:</strong> <a href="https://hub.docker.com/r/{{ index ( split . ":" ) 0 }}">{{ . }}</a>{{ end }}
 
