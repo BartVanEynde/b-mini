@@ -7,7 +7,7 @@ tags:
 - debug
 ---
 
-debug
+a debug test dump, what more is there to say...
 
 {{< debug >}}
 

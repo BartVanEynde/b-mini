@@ -1,5 +1,5 @@
 ---
-title: A first test
+title: .Site.Data.Tags - A first test
 description: Test - ( look in layouts/pages/test1.html for the code )
 tags:
 - sitedatatags

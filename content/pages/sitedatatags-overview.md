@@ -1,5 +1,5 @@
 ---
-title: This is what I want to do...
+title: .Site.Data.Tags - This is what I want to do...
 description: Overview of my problem
 tags:
 - sitedatatags

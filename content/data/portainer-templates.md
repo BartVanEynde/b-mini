@@ -1,5 +1,5 @@
 ---
-title: Portainer-Templates
+title: Portainer-Templates - One Big Table
 description: another data parsing test
 tags:
 - data

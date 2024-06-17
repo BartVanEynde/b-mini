@@ -13,4 +13,8 @@ docker = "dockers"
 
 [permalinks]
 # tags = "/tags/:slug/"
+# dockers = "/data/dockers/:slug/"
+[permalinks.term]
+dockers = "/data/dockers/:slug/"
+[permalinks.taxonomy]
 dockers = "/data/dockers/:slug/"

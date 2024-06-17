@@ -1,6 +1,6 @@
 ---
 date: 2023-06-18
-title: "Data dump"
+title: .Site.Data.Tags - Data dump
 draft: false
 tags:
 - sitedatatags

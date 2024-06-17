@@ -1,5 +1,5 @@
 ---
-title: Test2 - using index
+title: .Site.Data.Tags - Test2 - using index
 description: Test index
 tags:
 - sitedatatags
