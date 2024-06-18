@@ -86,7 +86,7 @@
 
 <p>
     <a href="/dockers/">/dockers/</a> <a href="/data/dockers/">(/data/Dockers)</a> &gt;&gt; 
-    <a href="/data/dockers/{{ $c_first }}">{{ $c_first | humanize }}</a> = 
+    {{ if (ne ( $title| lower ) $c_first) }}<a href="/data/dockers/{{ $c_first }}">{{ $c_first | humanize }}</a>{{ end }} = 
     {{ if and (ne $c_prevprev "") (ne $c_prevprev $c_first) }}<a href="/data/dockers/{{ $c_prevprev }}">{{ $c_prevprev | humanize }}</a> - {{ end }}
     {{ if and (ne $c_prev "") (ne $c_prev $c_first) }}<a href="/data/dockers/{{ $c_prev }}">{{ $c_prev | humanize }}</a> - {{ end }}
     <strong>{{ ( $title| humanize ) }}</strong>
