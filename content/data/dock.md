@@ -3,23 +3,19 @@ date: 2024-06-14
 title: Test Docker taxonomy
 draft: false
 dockers:
-- none
 - 3dprinters
 - accessproxy
-- adblocking
 - adult
 - ai
 - analytics
 - anitvirus
-- api
 - audio
 - authentication
+- authenticationserver
 - automation
 - backup
 - backupandsyncserver
-- blog
 - books
-- browsers
 - calendar
 - cctv
 - chat
@@ -65,9 +61,9 @@ dockers:
 - helpdesk
 - homeautomation
 - identitymanagement
-- iot
 - knowledgebase
 - learning
+- library
 - libraryserver
 - linksharing
 - llm
@@ -79,6 +75,7 @@ dockers:
 - managementutilityserver
 - marketing
 - media
+- mediaappbooks
 - mediaappvideo
 - mediamanagement
 - mediaserver
@@ -96,9 +93,11 @@ dockers:
 - network
 - networking
 - networkother
+- networkserver
 - networkweb
 - news
 - nocode
+- NONE
 - notesserver
 - offline
 - operatingsystem
@@ -107,7 +106,6 @@ dockers:
 - paas
 - pdf
 - pdftools
-- photo
 - photography
 - photos
 - podcast
@@ -125,10 +123,12 @@ dockers:
 - serverless
 - smarthome
 - social
+- statusstable
 - storage
 - streaming
 - system
 - taskserver
+- timerelated
 - timetracking
 - tool
 - tools
@@ -136,7 +136,6 @@ dockers:
 - utilities
 - utilitybackup
 - video
-- visualization
 - voice
 - vpn
 - vpnserver
@@ -144,6 +143,7 @@ dockers:
 - webplatform
 - webserver
 - wiki
+- wordpress
 ---
 
 ## Dock

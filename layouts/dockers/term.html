@@ -113,9 +113,23 @@
 
                 {{ with $options.repository }}<br /><br /><a href="{{ $options.repository.url }}">Repository</a> &gt; <a href="{{ $options.repository.url }}/tree/master/{{ $options.repository.stackfile }}">{{ $options.repository.stackfile }}</a> {{ end }}
 
-                {{ with $options.category }}<br /><br /><strong>Category:</strong> {{ delimit . ", " }}{{ end }}
-                {{ with $options.categories }}<br /><br /><strong>Category:</strong> {{ delimit . ", " }}{{ end }}
-                
+                {{ $tmp_cat := slice }}
+                {{/* with $options.category }}<br /><br /><strong>Category:</strong> {{ delimit . ", " }}{{ $tmp_cat = $options.category }}{{ end */}}
+                {{/* with $options.categories }}<br /><br /><strong>Category:</strong> {{ delimit . ", " }}{{ $tmp_cat = $options.categories }}{{ end */}}
+
+                {{ with $options.category }}{{ $tmp_cat = $options.category }}{{ end }}
+                {{ with $options.categories }}{{ $tmp_cat = $options.categories }}{{ end }}
+                {{ with $tmp_cat }}
+                    <br /><br /><strong>Category:</strong> 
+                    {{ range $t_cat := $tmp_cat }}
+                        {{ if (ne ( $title| lower ) ( $t_cat | lower ) ) }}
+                            <a href="/data/dockers/{{ $t_cat }}">{{ $t_cat | humanize }}</a>
+                        {{ else }}
+                            <strong>{{ $t_cat }}</strong>
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+
             </td>
             <td>{{ range $p := $options.ports }}{{ $p }}<br />{{ end }}</td>
 
