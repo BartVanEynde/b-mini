@@ -123,7 +123,7 @@
                     <br /><br /><strong>Category:</strong> 
                     {{ range $t_cat := $tmp_cat }}
                         {{ if (ne ( $title| lower ) ( $t_cat | lower ) ) }}
-                            <a href="/data/dockers/{{ $t_cat }}">{{ $t_cat | humanize }}</a>
+                            <a href="/data/dockers/{{ $t_cat | lower }}">{{ $t_cat | humanize }}</a>
                         {{ else }}
                             <strong>{{ $t_cat }}</strong>
                         {{ end }}
