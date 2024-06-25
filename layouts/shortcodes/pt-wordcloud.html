@@ -10,7 +10,7 @@
         {{ $unsortedcats = append ( replaceRE "[^A-Za-z0-9]" "" $ptcat | lower ) $unsortedcats }}
     {{ end }}
     {{ if ( and ( not $options.category ) ( not $options.categories ) ) }}
-        {{ $unsortedcats = append "NONE" $unsortedcats }}
+        {{ $unsortedcats = append "none" $unsortedcats }}
     {{ end }}   
 {{ end }}
 

@@ -171,14 +171,6 @@ tiles:
   tags:
     - "icons"
     - "svg"
--
-  name: "FotoEvents"
-  url: "https://fotoevents.be/"
-  img: "downloads/fotoevents.png"
-  txt_color: "#000000"
-  tags:
-    - "Wim Moortgat"
-    - "workshops"
-    - "fotografie"
+
 
 
