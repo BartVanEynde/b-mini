@@ -1,4 +1,18 @@
+{{/* https://stackoverflow.com/questions/57234520/filter-table-columns-in-vanilla-javascript-with-multiple-inputs */}}
+<script>
+    function filterTable() {
+        const query = q => document.querySelectorAll(q);
+        const filters = [...query('th input')].map(e => new RegExp(e.value, 'i'));
+
+        query('tbody tr').forEach(row => row.style.display = 
+            filters.every((f, i) => f.test(row.cells[i].textContent)) ? '' : 'none');
+    }
+</script>    
+
+
+
 <table class="zebra">
+    <thead>
     <tr>
         <th>Title</th>
         <th>Desc</th>
@@ -6,6 +20,14 @@
         <th>Env / Vol</th>
         {{/* <th>dump</th> */}}
     </tr>
+    <tr>
+        <th><input onkeyup="filterTable()" placeholder="Title... "></th>
+        <th><input onkeyup="filterTable()" placeholder="Description..."></th>
+        <th><input onkeyup="filterTable()" placeholder="Ports..."></th>
+        <th><input onkeyup="filterTable()" placeholder="Environment / Volumes..."></th>
+      </tr>
+    </thead>
+    <tbody>
     {{ $slateTitles := slice }}
 	{{ range $key, $options := ( sort .Site.Data.portainer_templates.templates ".title" "asc" ) }}
         <tr>
@@ -36,4 +58,5 @@
             {{/* <td><pre>{{ jsonify (dict "prefix" " " "indent" "  ") $options }}</pre></td> */}} 
         </tr>
     {{ end }}
+    </tbody>
 </table>
