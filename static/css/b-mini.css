@@ -180,6 +180,38 @@ table.zebra thead th input {
 
 
 
+/* wordcloud links */
+
+.wordcloud {
+  text-align: center;
+}
+
+.wordcloud a {
+  color: #333;
+  text-decoration: none;
+
+}
+.wordcloud a:hover {
+  color: #333;
+  text-decoration: underline;
+}
+
+a.single {
+  color: grey;
+
+}
+a.top5 {
+  font-weight: bold;
+  font-size: 200%;
+}
+a.top15 {
+  font-weight: bold;
+  font-size: 150%;
+}
+a.top25 {
+  font-size: 125%;
+}
+
 
 
 @media (max-width: 700px) {

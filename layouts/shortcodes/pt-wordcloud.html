@@ -1,0 +1,73 @@
+{{/* list all categories from the json together with the occurance in a wordcloud */}}
+
+{{ $unsortedcats := slice }}
+
+{{ range $key, $options := .Site.Data.portainer_templates.templates }}
+    {{ range $ptcat := $options.category }}
+        {{ $unsortedcats = append ( replaceRE "[^A-Za-z0-9]" "" $ptcat | lower ) $unsortedcats }}
+    {{ end }}
+    {{ range $ptcat := $options.categories }}
+        {{ $unsortedcats = append ( replaceRE "[^A-Za-z0-9]" "" $ptcat | lower ) $unsortedcats }}
+    {{ end }}
+    {{ if ( and ( not $options.category ) ( not $options.categories ) ) }}
+        {{ $unsortedcats = append "NONE" $unsortedcats }}
+    {{ end }}   
+{{ end }}
+
+
+
+
+{{ $allcats := slice }}
+{{ $countcats := newScratch }}
+{{ range $cat := $unsortedcats }}{{ $countcats.Add $cat 1 }}{{ end }}
+{{ range $cat := $unsortedcats | uniq | sort }}
+    {{/* $allcats = merge $allcats ( dict "cat" $cat "count" ($countcats.Get $cat) "html" "" ) */}}
+    {{ $allcats = append ( dict "cat" $cat "count" ($countcats.Get $cat) ) $allcats }}
+
+{{ end }}
+
+
+{{ $allhtmlcats := slice }}
+
+{{ $n := 0 }}
+{{ range $cat :=  sort $allcats "count" "desc"  }}
+    {{ $n = add $n 1  }}
+
+    {{ if lt .count 2 }}
+        {{ $allhtmlcats = append ( dict "cat" .cat "count" .count "html" ( printf " <a class=\"single\" href=\"%s\">%s</a> " .cat ( .cat | title ) ) ) $allhtmlcats }}
+    {{ end }}
+    {{ if and (gt .count 1) (le $n 5) }}
+        {{ $allhtmlcats = append ( dict "cat" .cat "count" .count "html" ( printf " <a class=\"top5\" href=\"%s\">%s(%d)</a> " .cat ( .cat | title ) .count ) ) $allhtmlcats }}
+    {{ end }}
+    {{ if and (gt .count 1) (gt $n 5) (lt $n 15) }}
+        {{ $allhtmlcats = append ( dict "cat" .cat "count" .count "html" ( printf " <a class=\"top15\" href=\"%s\">%s(%d)</a> " .cat ( .cat | title ) .count ) ) $allhtmlcats }}
+    {{ end }}
+    {{ if and (gt .count 1) (ge $n 15) (lt $n 25) }}
+        {{ $allhtmlcats = append ( dict "cat" .cat "count" .count "html" ( printf " <a class=\"top25\" href=\"%s\">%s(%d)</a> " .cat ( .cat | title ) .count ) ) $allhtmlcats }}
+    {{ end }}
+    {{ if and (gt .count 1) (ge $n 25) }}
+        {{ $allhtmlcats = append ( dict "cat" .cat "count" .count "html" ( printf " <a class=\"25plus\" href=\"%s\">%s</a> " .cat ( .cat | title ) ) ) $allhtmlcats }}
+    {{ end }}
+
+
+
+
+
+
+{{ end }}
+
+
+{{/* <pre>{{ jsonify (dict "prefix" " " "indent" "  ") $allhtmlcats }}</pre> */}}
+
+<div class="wordcloud">
+{{ range $cat :=  sort $allhtmlcats "cat" "asc"  }}
+    {{ .html | safeHTML }} &nbsp; 
+
+
+{{ end }}
+</div>
+
+
+
+
+
