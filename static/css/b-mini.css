@@ -152,8 +152,12 @@ body {
 
 
 
-.zebra tbody tr:nth-child(even) {
+.zebra-orig tbody tr:nth-child(even) {
   background-color: #ccc;
+}
+/* https://stackoverflow.com/questions/46786663/is-there-a-selector-to-exclude-display-none-elements */
+.zebra tbody tr:not([style*="display: none"]):nth-child(even) { 
+  background-color:  #ccc;  
 }
 .zebra tbody tr:hover {
   background: #999;
@@ -211,6 +215,43 @@ a.top15 {
 a.top25 {
   font-size: 125%;
 }
+
+
+
+/* https://www.freecodecamp.org/news/css-only-back-to-top-button/ */
+body {
+  display: grid;
+  grid-template-columns: auto 0px; 
+}
+
+.top {
+  --offset: 50px; 
+  position: sticky;
+  bottom: 20px;      
+  margin-right:10px; 
+  place-self: end;
+  margin-top: calc(100vh + var(--offset));
+  
+  /* visual styling */
+  width:45px;
+  aspect-ratio:1;
+  background:#ff8b24;
+  border-radius:10px;
+}
+.top:before {
+  content:"";
+  position:absolute;
+  inset:30%;
+  transform:translateY(20%) rotate(-45deg);
+  border-top:5px solid #fff;
+  border-right:5px solid #fff;
+}
+/* remove the below if you don't want smooth scrolling */
+html,
+body {
+  scroll-behavior: smooth;
+}
+
 
 
 

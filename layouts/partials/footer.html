@@ -1,6 +1,5 @@
 <div class="footer" >
-    <p>[ {{ printf "BundleType='%s' Section='%s' Type='%s' Kind='%s' Layout='%s' Version='%s' " .BundleType .Section .Type .Kind .Layout hugo.Version }} ]</p>
-
+    <p>[ {{ printf "BundleType='%s' Section='%s' Type='%s' Kind='%s' Layout='%s' Version='%s' Build='%s' " .BundleType .Section .Type .Kind .Layout hugo.Version (now.Format "02 January 2006") }} ]</p>
 
 </div>
 
