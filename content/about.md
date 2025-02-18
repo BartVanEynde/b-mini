@@ -12,8 +12,7 @@ url: "/about/"
 
 ## A: Sure, you're looking at it... :-)
 
-[Hosted on GitHub/see the hugo source](https://github.com/BartVanEynde/b-mini) and [deployed at CloudFlare](https://developers.cloudflare.com/pages/framework-guides/deploy-a-hugo-site/) with the help of [Hugo](https://gohugo.com/), a static side generator. 
+[Hosted on GitHub/see the hugo source](https://github.com/BartVanEynde/b-mini) and [deployed at CloudFlare](https://developers.cloudflare.com/pages/framework-guides/deploy-a-hugo-site/) with the help of [Hugo](https://gohugo.io/), a static side generator. 
 
 
 
-{{< version >}}
